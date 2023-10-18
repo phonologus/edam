@@ -86,6 +86,10 @@ int Fgetcset(File *f, Posn p);
 int Fbgetcset(File *f, Posn p);
 int Fgetcload(File *f, Posn p);
 int Fbgetcload(File *f, Posn p);
+int Fgetc(File *f);
+int Fbgetc(File *f);
+int Fgetu8(File *f, char *p);
+int Fbgetu8(File *f, char *p);
 
 /* io.c */
 

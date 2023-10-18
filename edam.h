@@ -10,7 +10,6 @@
 
 #define INFTY ((Posn)0x7FFFFFFFFFFFFFFFL)
 #define INCR 25
-#define SS 2 /* shorts are hardwired to two bytes in files */
 
 typedef unsigned short ushort;
 typedef unsigned long ulong;
@@ -134,20 +133,11 @@ typedef struct Node{
    Inst   *first;
    Inst   *last;
 }Node;
-#define Fgetc(f) ((--(f)->ngetc<0)? Fgetcload(f, (f)->getcp) : 0377&(f)->getcbuf[(f)->getcp++, (f)->getci++])
-#define Fbgetc(f) (((f)->getci<=0)? Fbgetcload(f, (f)->getcp) : 0377&(f)->getcbuf[--(f)->getcp, --(f)->getci])
 
-/*
-#define PUTPOSN(d,s) *(Posn *)d = *(s), d+=sizeof(Posn)
-#define GETPOSN(p,s) p = *(Posn *)(s)
-*/
-
-#define PUTPOSN(d,s) { char *P=(char *)(s); int _n=sizeof(Posn);\
+#define PUTT(d,s,T) { char *P=(char *)&(s); int _n=sizeof(T);\
  while(_n-->0) *d++= *P++; }
-#define GETPOSN(p,s) { long L; char *P1=(s),*P2=(char *)&L;\
- int _n=sizeof(Posn); while(_n-->0) *P2++= *P1++; p = L; }
-
-#define HIGHBIT 0x00
+#define GETT(p,s,T) { long L; char *P1=(s),*P2=(char *)&L;\
+ int _n=sizeof(T); while(_n-->0) *P2++= *P1++; p = L; }
 
 #include "parse.h"
 #include "funcs.h"
@@ -173,7 +163,4 @@ extern String genstr;
 extern String lastpat;
 extern String lastregexp;
 extern String unixcmd;
-extern int dontcompact;
-extern int downloaded;
-extern int dounlock;
 

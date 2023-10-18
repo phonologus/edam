@@ -34,6 +34,10 @@ int Fgetcset(File *f, Posn p);
 int Fbgetcset(File *f, Posn p);
 int Fgetcload(File *f, Posn p);
 int Fbgetcload(File *f, Posn p);
+int Fgetc(File *f);
+int Fbgetc(File *f);
+int Fgetu8(File *f, char *p);
+int Fbgetu8(File *f, char *p);
 
 static String * ftempstr(char *s, int n);
 
@@ -225,8 +229,8 @@ Fupdate(File *f, int isundo)
       default:
          panic("unknown in Fupdate");
       case 'd':
-         GETPOSN(p1, buf+1);
-         GETPOSN(p2, buf+1+sizeof(Posn));
+         GETT(p1, buf+1, Posn);
+         GETT(p2, buf+1+sizeof(Posn), Posn);
          p0+=1+2*sizeof(Posn);
          if(p2<=f->dot.r.p1)
             deltadot-=p2-p1;
@@ -249,9 +253,8 @@ Fupdate(File *f, int isundo)
          changes=TRUE;
          break;
       case 'f':
-         n=buf[1]&0xFF;
-         n|=buf[2]<<8;
-         p0+=1+SS;
+         GETT(n, buf+1, short);
+         p0+=1+sizeof(short);
          strinsure(&genstr, (ulong)n);
          Bread(t, tmp, n, p0);
          p0+=n;
@@ -265,10 +268,9 @@ Fupdate(File *f, int isundo)
          changes=TRUE;
          break;
       case 'i':
-         n=buf[1]&0xFF;
-         n|=buf[2]<<8;
-         GETPOSN(p1, (buf+1+SS));
-         p0+=1+SS+sizeof(Posn);
+         GETT(n, buf+1, short);
+         GETT(p1, buf+1+sizeof(short), Posn);
+         p0+=1+sizeof(short)+sizeof(Posn);
          if(p1<f->dot.r.p1)
             deltadot+=n;
          if(p1<f->mark.p1)
@@ -327,30 +329,30 @@ Fupdate(File *f, int isundo)
 void
 puthdr_csP(Buffer *b, char c, short s, Posn p)
 {
-   char buf[1+SS+sizeof p];
+   char buf[1+sizeof(short)+sizeof p];
    char *a=buf;
    if(p<0)
       panic("puthdr_csP");
-   *a++=c;
-   *a++=s;
-   *a++=s>>8;
-   PUTPOSN(a, &p);
+   PUTT(a, c, char);
+   PUTT(a, s, short);
+   PUTT(a, p, Posn);
    Binsert(b, ftempstr(buf, sizeof buf), b->nbytes);
 }
 void
 puthdr_cs(Buffer *b, char c, short s)
 {
-   char buf[1+SS];
+   char buf[1+sizeof(short)];
    char *a=buf;
-   *a++=c;
-   *a++=s;
-   *a=s>>8;
+   PUTT(a, c, char);
+   PUTT(a, s, short);
    Binsert(b, ftempstr(buf, sizeof buf), b->nbytes);
 }
 void
 puthdr_M(Buffer *b, Posn p, Range dot, Range mk, Mod m, short s1)
 {
    Mark mark;
+   char buf[sizeof(Mark)];
+   char *a=buf;
    static int first=1;
    if(!first && p<0)
       panic("puthdr_M");
@@ -359,7 +361,8 @@ puthdr_M(Buffer *b, Posn p, Range dot, Range mk, Mod m, short s1)
    mark.mark=mk;
    mark.m=m;
    mark.s1=s1;
-   Binsert(b, ftempstr((char *)&mark, sizeof mark), b->nbytes);
+   PUTT(a, mark, Mark);
+   Binsert(b, ftempstr(buf, sizeof buf), b->nbytes);
 }
 void
 puthdr_cPP(Buffer *b, char c, Posn p1, Posn  p2)
@@ -368,9 +371,9 @@ puthdr_cPP(Buffer *b, char c, Posn p1, Posn  p2)
    char *a=buf;
    if(p1<0 || p2<0)
       panic("puthdr_cPP");
-   *a++=c;
-   PUTPOSN(a, &p1);
-   PUTPOSN(a, &p2);
+   PUTT(a, c, char);
+   PUTT(a, p1, Posn);
+   PUTT(a, p2, Posn);
    Binsert(b, ftempstr(buf, sizeof buf), b->nbytes);
 }
 int
@@ -419,7 +422,46 @@ Fbgetcload(File *f, Posn p)
    }
    return -1;
 }
+int
+Fgetc(File *f)
+{
+   if(--f->ngetc<0)
+      return Fgetcload(f, f->getcp);
+   f->getcp++;
+   return 0377&f->getcbuf[f->getci++];
+}
+int
+Fbgetc(File *f)
+{
+   if(f->getci<=0)
+      return Fgetcload(f, f->getcp);
+   --f->getcp;
+   return 0377&f->getcbuf[--f->getci];
+}
 
+static File *gfile;
+int
+Fgetter(void)
+{
+   return Fgetc(gfile);
+}
+int
+Fbgetter(void)
+{
+   return Fbgetc(gfile);
+}
+int
+Fgetu8(File *f, char *p)
+{
+   gfile=f;
+   return u8getc(Fgetter,p);
+}
+int
+Fbgetu8(File *f, char *p)
+{
+   gfile=f;
+   return u8bgetc(Fbgetter,p);
+}
 static String *
 ftempstr(char *s, int n)
 {

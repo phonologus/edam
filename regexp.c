@@ -404,7 +404,7 @@ fgetunicode(File *f, int *u)
    int n;
    char p[U8BYTES];
    *u=-1;
-   if((n=u8fgetc(f,p))<0)
+   if((n=Fgetu8(f,p))<0)
       error(Ebadutf);
    if(n)
       *u=u8decode(p);
@@ -416,7 +416,7 @@ fbgetunicode(File *f, int *u)
    int n;
    char p[U8BYTES];
    *u=-1;
-   if((n=u8fbgetc(f,p))<0)
+   if((n=Fbgetu8(f,p))<0)
       error(Ebadutf);
    if(n)
       *u=u8decode(p);

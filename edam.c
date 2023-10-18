@@ -532,7 +532,7 @@ charcount(File *f, Posn p0, Posn  p1)
    Posn nc=0;
    Fgetcset(f, p0);
    while(p0<p1){
-      if((i=u8fgetc(f,p))>0){
+      if((i=Fgetu8(f,p))>0){
          p0+=i;
          nc++;
       }else if(i<0){
@@ -551,7 +551,7 @@ charposn(File *f, Posn p0, Posn  nc)
    Fgetcset(f, p0);
    if(nc>0){
       while(nc-->0){
-         if((i=u8fgetc(f,p))>0){
+         if((i=Fgetu8(f,p))>0){
             p0+=i;
          }else if(i<0){
             warn(Wnonutf);
@@ -563,7 +563,7 @@ charposn(File *f, Posn p0, Posn  nc)
    }else{
       nc=-nc;
       while(nc-->0){
-         if((i=u8fbgetc(f,p))>0){
+         if((i=Fbgetu8(f,p))>0){
             p0-=i;
          }else if(i<0){
             warn(Wnonutf);
