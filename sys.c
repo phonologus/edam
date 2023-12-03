@@ -14,7 +14,7 @@ void
 syserror(char *a)
 {
    dprint("%s: ", a);
-   error_s(Eio, (char *)((errno && errno<sys_nerr)? sys_errlist[errno] : "error 0"));
+   error_s(Eio, strerror(errno));
 }
 int
 Read(int f, char *a, size_t n)
