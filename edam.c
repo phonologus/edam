@@ -137,6 +137,7 @@ rescue(int s)
       exit(1);
    signal(SIGHUP, SIG_IGN);
    io=-1;
+   fio=NULL;
    for(i=0; i<file.nused; i++){
       f=file.ptr[i];
       if(f->nbytes==0 || f->state!=Dirty)
