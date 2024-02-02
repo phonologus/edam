@@ -1,7 +1,7 @@
 .SUFFIXES: .o .c .h
 .PHONY: all clean install uninstall
 
-CFLAGS= -O2 -Wall -fno-builtin -I.
+CFLAGS= -O2 -Wall -pedantic -fno-builtin -I.
 LDFLAGS=
 CC=cc
 

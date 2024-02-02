@@ -280,7 +280,7 @@ Dreplace(Disc *d, Posn p1, Posn  p2, char *addr, int n)
          nr=nb-(p1-p);
       else
          nr=p2-p1;
-      memmove(buf+p1-p,addr,nr);
+      memmove(buf+(p1-p),addr,nr);
       bkwrite(d, buf, nb, i, 0);
       /* advance to next block */
       p+=nb;
