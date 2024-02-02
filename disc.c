@@ -217,7 +217,7 @@ Ddelete(Disc *d, Posn p1, Posn  p2)
          nd=nb-(p1-p);
       else{
          nd=p2-p1;
-         memmove(buf+(p1-p),buf+(p1-p)+nd,(p1-p)+nd-nb);
+         memmove(buf+(p1-p),buf+(p1-p)+nd,nb-(p1-p)-nd);
       }
       nb-=nd;
       bkwrite(d, buf, nb, i, 0);
