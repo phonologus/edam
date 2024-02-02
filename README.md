@@ -29,7 +29,7 @@ can do things like
 Building
 ========
 
-Building and installing _qed_ should be as easy as:
+Building and installing _Edam_ should be as easy as:
 
     make clean && make && make install
 
