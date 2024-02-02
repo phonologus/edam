@@ -1,0 +1,66 @@
+#!/bin/sh
+# sedam - stream interface to edam
+
+usage() {
+   echo "Usage: $0 [-n] [-e <script>] [-f <script_file>] [file ...]"
+}
+
+while [[ $# -gt 0 ]]; do
+   case X$1 in
+      X-n)
+         flagn=$1
+         shift
+         ;;
+      X-e)
+         flage="$2"
+         shift ; shift
+         ;;
+      X-f)
+         flagf="$2"
+         shift ; shift
+         ;;
+      X-*)
+         usage
+         exit 1
+         ;;
+      *)
+         break
+         ;;
+   esac
+done
+
+if [ -z "$flage" -a  -z "$flagf" ]; then
+	if [[ $# -eq 0 ]]; then
+		usage
+		exit 2
+	fi	
+	flage="$1"
+	shift
+fi
+
+if [ -z "$TMPDIR" ]; then
+	TMPDIR=/tmp
+fi
+tmp=$TMPDIR/sedam.tmp.$USER.$$
+cat $* >$tmp
+
+{
+	# select entire file
+	echo ',{'
+	echo k
+	echo '}'
+	echo 0k
+
+	# run scripts, print
+	if [ -n "$flagf" ]; then
+		cat $flagf
+	fi
+	if [ -n "$flage" ]; then
+		echo $flage
+	fi
+	if [ -z $flagn ]; then
+		echo ,
+	fi
+} | edam $tmp 2>/dev/null
+
+rm -f $tmp

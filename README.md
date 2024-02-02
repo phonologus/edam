@@ -20,6 +20,10 @@ editor, in the tradition of _ed_, with multi-file editing, with
 structural regular expressions, and an elegant command language.
 _Edam_ works with UTF-8 encoded text.
 
+Included with _Edam_ is a wrapper script `sedam`, and its associated manpage
+`sedam.1`, which provides a `sed`-like interface to `edam`. Thus one
+can do things like `cat foo | sedam 's/a/z/g'`
+
 Building
 ========
 
@@ -29,7 +33,8 @@ Building and installing _qed_ should be as easy as:
 
 Installation is into `/usr/local/bin`. The `edam` binary is
 self-contained, and can be moved anywhere. The manpage is
-installed to `/usr/local/share/man/man1`.
+installed to `/usr/local/share/man/man1`. The `sedam` script
+and its manpage are also installed.
 
 To uninstall, `make uninstall`.
 
@@ -57,14 +62,17 @@ in directory `/jerq/src/sam/`.
 
 [1]: https://www.tuhs.org/Archive/Distributions/Research/Norman_v10/
 
+_Sedam_, and both manpages, are derived from the [Plan9 port][2]
+versions of these files.
+
+[2]: https://github.com/9fans/plan9port
+
 Authors
 =======
 
 _Sam_ was written by Rob Pike in the late 1980s. Originally a Unix
 program, it was quickly ported to Plan9, where it survives to this day
 in the [Plan 9 port][2].
-
-[2]: https://github.com/9fans/plan9port
 
 In 2023, Sean Jensen reformatted the original Unix
 sourcecode to be ANSI-compliant C, and made changes to (i) make
