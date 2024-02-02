@@ -137,7 +137,7 @@ typedef struct Node{
 #define PUTT(d,s,T) { char *P=(char *)&(s); int _n=sizeof(T);\
  while(_n-->0) *d++= *P++; }
 #define GETT(p,s,T) { long L; char *P1=(s),*P2=(char *)&L;\
- int _n=sizeof(T); while(_n-->0) *P2++= *P1++; p = L; }
+ int _n=sizeof(T); while(_n-->0) *P2++= *P1++; p = (T)L; }
 
 #include "parse.h"
 #include "funcs.h"
