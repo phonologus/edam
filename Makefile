@@ -66,7 +66,7 @@ install: all $(MANPAGE) $(PROG)save s$(PROG) s$(MANPAGE)
 	$(INSTALL) -s $(PROG) $(BINDIR)/
 	$(INSTALL) $(PROG)save $(BINDIR)/
 	$(INSTALL) $(MANPAGE) $(MANDIR)$(MSECTION)/
-	$(INSTALL) s$(PROG)save $(BINDIR)/
+	$(INSTALL) s$(PROG) $(BINDIR)/
 	$(INSTALL) s$(MANPAGE) $(MANDIR)$(MSECTION)/
 
 uninstall:
