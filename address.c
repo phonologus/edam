@@ -163,7 +163,7 @@ Address
 lineaddr(Posn p, Address addr, int sign)
 {
    int n;
-   int c;
+   int c=0;
    File *f=addr.f;
    Address a;
    a.f=f;
