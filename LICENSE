@@ -1,13 +1,9 @@
 Except for the `Makefile`, and the files `utf.c` and `utf.h`,
 the C source code and header files are derived from the Research Unix Version 10
-sources hosted at The Unix Archive, and therefore fall under the terms of the
-_Statement Regarding Research Unix Editions 8, 9, and 10_ which accompanies that
-sourcecode.
+sources hosted at The Unix Archive.
 
-The _Statement_ is included in the current repository in the file
-`statement_regarding_Unix_3-7-17.pdf`.
-
-The `Makefile`, and the files `utf.c` and `utf.h` are copyright (c) 2023 Sean Jensen,
+The `Makefile`, and the files `utf.c` and `utf.h` are
+copyright (c) 2023 Sean Jensen,
 and are released under the terms of the MIT License herewith:
 
 Copyright (c) 2023 Sean Jensen
