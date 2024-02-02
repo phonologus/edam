@@ -22,7 +22,9 @@ _Edam_ works with UTF-8 encoded text.
 
 Included with _Edam_ is a wrapper script `sedam`, and its associated manpage
 `sedam.1`, which provides a `sed`-like interface to `edam`. Thus one
-can do things like `cat foo | sedam 's/a/z/g'`
+can do things like
+
+    cat foo | sedam 's/a/z/g'
 
 Building
 ========
@@ -70,16 +72,14 @@ versions of these files.
 Authors
 =======
 
-_Sam_ was written by Rob Pike in the late 1980s. Originally a Unix
-program, it was quickly ported to Plan9, where it survives to this day
+_Sam_ was written by Rob Pike in the late 1980s. It survives to this day
 in the [Plan 9 port][2].
 
-In 2023, Sean Jensen reformatted the original Unix
+In 2023, Sean Jensen reformatted the original 1980s Unix
 sourcecode to be ANSI-compliant C, and made changes to (i) make
 it compile on an up-to-date ANSI/POSIX system; (ii) to add new
 capabilities for processing UTF-8 encoded text; and (iii) to
 remove the graphical terminal/GUI dependencies.
 
-The source files `utf.[ch]` were written entirely
-by Sean Jensen.
+The source files `utf.[ch]` were written entirely by Sean Jensen.
 
