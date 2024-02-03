@@ -8,6 +8,8 @@ edam \- multi-file line editor with structural regular expressions
 [
 .I -d 
 ] [
+.I --
+] [
 .I files
 ]
 .PP
@@ -35,6 +37,9 @@ The options are
 .B -d
 Ignored. Here for compatibility with original
 .IR sam(1).
+.TP
+.B --
+End of commandline options. Following arguments are filenames.
 .SS Regular expressions
 Regular expressions are as in
 .IR egrep 

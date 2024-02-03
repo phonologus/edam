@@ -15,6 +15,9 @@ sedam \- stream interface to edam
 .I sfile
 ]
 [
+.B --
+]
+[
 .I file ...
 ]
 .SH DESCRIPTION
@@ -39,6 +42,10 @@ may be omitted.
 The
 .B -n
 option suppresses the default output.
+The
+.B --
+option signals the end of the commandline options. All following arguments
+are filenames.
 .ne 4
 .SH EXAMPLES
 .TP
