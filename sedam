@@ -19,6 +19,10 @@ while [[ $# -gt 0 ]]; do
          flagf="$2"
          shift ; shift
          ;;
+      X--)
+         shift
+         break
+         ;;
       X-*)
          usage
          exit 1

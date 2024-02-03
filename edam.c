@@ -63,13 +63,17 @@ int
 main(int argc, char *argv[])
 {
    int i;
+   int optend=0;
    sig_t onintr;
 if(sizeof(Block)!=sizeof(long))
 panic("|Block| != |long|");
 if(sizeof(Posn)!=sizeof(long*))
 panic("|Posn| != |long*|");
-   while(argc>1 && argv[1][0]=='-'){
+   while(!optend && argc>1 && argv[1][0]=='-'){
       switch(argv[1][1]){
+      case '-':
+         optend++;
+         break;
       case 'd':
          break;
       default:
