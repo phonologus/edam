@@ -59,8 +59,8 @@ typedef struct Disc{
    }block;         /* array of used blocks (same shape as List) */
 }Disc;
 typedef struct String{
-   short   n;
-   short   size;
+   ulong   n;
+   ulong   size;
    char   *s;
 }String;
 typedef struct Buffer{

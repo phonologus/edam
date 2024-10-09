@@ -4,6 +4,8 @@
 
 #define MINSIZE 16 /* minimum number of chars allocated */
 #define MAXSIZE BLOCKSIZE /* maximum number of chars for an empty string */
+#define STRREALLOCSIZE 512
+#define STRLIMIT ULONG_MAX-STRREALLOCSIZE
 
 
 void strinit(String *p);
@@ -60,14 +62,13 @@ straddc(String *p, int c)
 void
 strinsure(String *p, ulong n)
 {
-   size_t i;
-   if(n>=32767)
-      error(Etoolong);
+   ulong i;
+
+   if(n>=STRLIMIT)
+     error(Etoolong);
+
    if(p->size<n){   /* p needs to grow */
-      for(i=1; i<n; i<<=1)
-         ;
-      if(i==32768L)
-         i=32767L;
+      i=n+STRREALLOCSIZE;
       p->s=(char*)allocre(p->s, i);
       p->size=i;
    }
