@@ -238,7 +238,7 @@ s_cmd(File *f, Cmd *cp)
                error(Elongrhs);
             Fchars(f, genbuf, sel.p[0].p1, sel.p[0].p2);
             strinsert(&genstr,
-               tempstr(genbuf, (int)(sel.p[0].p2-sel.p[0].p1)),
+               tempstr(genbuf, (ulong)(sel.p[0].p2-sel.p[0].p1)),
                (ulong)genstr.n);
          }
       if(sel.p[0].p1!=sel.p[0].p2){
