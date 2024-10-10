@@ -228,7 +228,7 @@ s_cmd(File *f, Cmd *cp)
                if(sel.p[j].p2-sel.p[j].p1>BLOCKSIZE)
                   error(Elongsub);
                Fchars(f, genbuf, sel.p[j].p1, sel.p[j].p2);
-               strinsert(&genstr, tempstr(genbuf, (int)(sel.p[j].p2-sel.p[j].p1)), (ulong)genstr.n);
+               strinsert(&genstr, tempstr(genbuf, (ulong)(sel.p[j].p2-sel.p[j].p1)), (ulong)genstr.n);
             }else
                 straddc(&genstr, c);
          }else if(c!='&')

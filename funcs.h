@@ -199,7 +199,7 @@ void straddc(String *p, int c);
 void strinsure(String *p, ulong n);
 void strinsert(String *p, String  *q, Posn p0);
 void strdelete(String *p, Posn p1, Posn  p2);
-String * tempstr(char *s, int n);
+String * tempstr(char *s, ulong n);
 
 /* sys.c */
 

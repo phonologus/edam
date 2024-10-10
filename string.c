@@ -17,7 +17,7 @@ void straddc(String *p, int c);
 void strinsure(String *p, ulong n);
 void strinsert(String *p, String  *q, Posn p0);
 void strdelete(String *p, Posn p1, Posn  p2);
-String * tempstr(char *s, int n);
+String * tempstr(char *s, ulong n);
 
 void
 strinit(String *p)
@@ -89,7 +89,7 @@ strdelete(String *p, Posn p1, Posn  p2)
    p->n-=(p2-p1);
 }
 String *
-tempstr(char *s, int n)
+tempstr(char *s, ulong n)
 {
    static String p;
    p.s=s;
