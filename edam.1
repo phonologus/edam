@@ -8,8 +8,6 @@ edam \- multi-file line editor with structural regular expressions
 [
 .I -d 
 ] [
-.I --
-] [
 .I files
 ]
 .PP
@@ -37,9 +35,6 @@ The options are
 .B -d
 Ignored. Here for compatibility with original
 .IR sam(1).
-.TP
-.B --
-End of commandline options. Following arguments are filenames.
 .SS Regular expressions
 Regular expressions are as in
 .IR egrep 
@@ -556,23 +551,6 @@ if the
 is omitted the last
 .I Unix command
 (of any type) is substituted.
-If
-.I edam
-is downloaded,
-.B !
-sets standard input to
-.FR /dev/null ,
-and otherwise
-unassigned output
-.RB ( stdout
-for
-.B !
-and
-.BR > ,
-.B stderr
-for all) is placed in
-.F $HOME/edam.err
-and the first few lines are printed.
 .SS Loops and Conditionals
 .TP
 .BI x/ regexp / " command
@@ -672,11 +650,7 @@ and
 .BR D .
 .TP
 (empty)
-If the range is explicit, set dot to the range.
-If
-.I edam
-is downloaded, the resulting dot is selected on the screen;
-otherwise it is printed.
+If the range is explicit, set dot to the range, and print it.
 If no address is specified (the
 command is a newline) dot is extended in either direction to
 line boundaries and printed.
@@ -711,16 +685,14 @@ terminates other than by a
 command (by hangup, deleting its layer, etc.), modified
 files are saved in an
 executable file,
-.FR $HOME/edam.save .
+.BR $HOME/edam.save .
 This program, when executed, asks whether to write
 each file back to a Unix file.
 The answer
 .IR y
 causes writing; anything else skips the file.
 .SH FILES
-.F $HOME/edam.save
-.br
-.F $HOME/edam.err
+.B $HOME/edam.save
 .SH SEE ALSO
 .IR ed (1),
 .IR sam (1),

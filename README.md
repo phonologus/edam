@@ -1,7 +1,7 @@
 The _Edam_ editor
 =================
 
-_Edam_ is the Research Unix Version 10 editor `sam` without
+_Edam_ is the Research Unix Version 10 text editor `sam` without
 the graphical terminal driver. It only has the `ed`-like
 line editor terminal interface. It should be able to serve
 as a drop-in replacement for `sam -d`.
@@ -48,8 +48,9 @@ UTF-8
 
 Although the Plan9 _Sam_ editor processes UTF-8, it uses
 a completely different implementation strategy. _Edam_
-converts UTF-8 text into Unicode code points, on the fly,
-but only when it absolutely has to. This drastically reduces the memory
+works on the raw UTF-8 encoded text itself, temporarily converting to Unicode
+code-points only when absolutely necessary.
+This drastically reduces the memory
 and on-disk storage requirements, at the expense of a little extra
 processing. 
 
@@ -65,7 +66,7 @@ in directory `/jerq/src/sam/`.
 [1]: https://www.tuhs.org/Archive/Distributions/Research/Norman_v10/
 
 _Sedam_, and both manpages, are derived from the [Plan9 port][2]
-versions of these files.
+versions of these files (`ssam` and `ssam.1`).
 
 [2]: https://github.com/9fans/plan9port
 
