@@ -60,7 +60,7 @@ cat $* >$tmp
 		cat $flagf
 	fi
 	if [ -n "$flage" ]; then
-		echo $flage
+		echo -n "$flage"
 	fi
 	if [ -z $flagn ]; then
 		echo ,
