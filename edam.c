@@ -11,6 +11,7 @@ typedef struct Patlist{
 }Patlist;
 
 char genbuf[BLOCKSIZE];
+char *tmpdir;
 char *home;
 int io;
 int panicking;
@@ -97,6 +98,9 @@ panic("|Posn| != |long*|");
    home=getenv("HOME");
    if(home==0)
       home="/tmp";
+   tmpdir=getenv("TMPDIR");
+   if (tmpdir==0) 
+      tmpdir="/tmp";
    if(argc>1){
       for(i=1; i<argc; i++)
 {
