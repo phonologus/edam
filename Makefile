@@ -9,8 +9,11 @@ INSTALL=install
 BUNDLE=bundle
 
 PROG=edam
-
-INSTALLD=/usr/local
+ifeq ($(PREFIX),)
+    INSTALLD=/usr/local
+else
+    INSTALLD=$(PREFIX)
+endif
 BINDIR=$(INSTALLD)/bin
 MANDIR=$(INSTALLD)/share/man/man
 

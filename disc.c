@@ -3,7 +3,7 @@
 #include "edam.h"
 
 static Discdesc desc[NBUFFILES];
-static char tempfname[30];
+static char tempfname[64];
 static int inited=0;
 
 extern char *tmpdir;
