@@ -33,9 +33,9 @@ Building and installing _Edam_ should be as easy as:
 
     make clean && make && make install
 
-Installation is into `$PREFIX/bin` or `/usr/local/bin` if `$PREFIX` 
-is not defined. The `edam` binary is self-contained, and can be
-moved anywhere. The manpage is installed to
+Installation is into `$PREFIX/bin`, or to `/usr/local/bin` if
+`$PREFIX` is not defined. The `edam` binary is self-contained,
+and can be moved anywhere. The manpage is installed to
 `$PREFIX/share/man/man1`. The `sedam` script and its manpage
 are also installed.
 
