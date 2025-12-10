@@ -43,6 +43,7 @@ UNITS=\
   edam \
   string \
   sys \
+  tmpdir \
   unix \
   utf \
   xec \

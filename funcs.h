@@ -208,6 +208,12 @@ int Read(int f, char *a, size_t n);
 int Write(int f, char *a, size_t n);
 void Lseek(int f, size_t n, int w);
 
+/* tmpdir.c */
+
+void mktempfname(int i);
+char *mktmpdir(char *td);
+void rmtmpdir(void);
+
 /* unix.c */
 
 void Unix(File *f, int type, String *s, int nest);

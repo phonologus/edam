@@ -12,6 +12,7 @@ typedef struct Patlist{
 
 char genbuf[BLOCKSIZE];
 char *home;
+char *tmpdir;
 int io;
 int panicking;
 int rescuing;
@@ -65,10 +66,10 @@ main(int argc, char *argv[])
    int i;
    int optend=0;
    sig_t onintr;
-if(sizeof(Block)!=sizeof(long))
-panic("|Block| != |long|");
-if(sizeof(Posn)!=sizeof(long*))
-panic("|Posn| != |long*|");
+   if(sizeof(Block)!=sizeof(long))
+      panic("|Block| != |long|");
+   if(sizeof(Posn)!=sizeof(long*))
+      panic("|Posn| != |long*|");
    while(!optend && argc>1 && argv[1][0]=='-'){
       switch(argv[1][1]){
       case '-':
@@ -82,6 +83,10 @@ panic("|Posn| != |long*|");
       }
       --argc, argv++;
    }
+   char *td=getenv("TMPDIR");
+   if(td==0)
+      td="/tmp";
+   tmpdir = mktmpdir(td);
    Fstart();
    strinit(&cmdstr);
    strinit(&lastpat);
@@ -89,14 +94,14 @@ panic("|Posn| != |long*|");
    strinit(&genstr);
    strinit(&rhs);
    strinit(&wd);
+   strinit(&unixcmd);
+   straddc(&unixcmd, '\0');
 /*
    tempfile.ptr=(File**)alloc(0);
 */
-   strinit(&unixcmd);
-   straddc(&unixcmd, '\0');
    home=getenv("HOME");
    if(home==0)
-      home="/tmp";
+      home=tmpdir;
    if(argc>1){
       for(i=1; i<argc; i++)
 {
@@ -159,7 +164,7 @@ rescue(int s)
       strcpy(buf, f->name.s);
       if(buf[0]==0)
          sprintf((char *)buf, "nameless.%d", nblank++);
-      
+
       fprintf(fio, "/usr/bin/env edamsave '%s' $* <<'---%s'\n",
          (char *)buf, (char *)buf);
       fflush(fio);

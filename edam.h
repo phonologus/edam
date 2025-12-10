@@ -163,4 +163,5 @@ extern String genstr;
 extern String lastpat;
 extern String lastregexp;
 extern String unixcmd;
-
+extern char *tempfname;
+extern char *tmpdir;

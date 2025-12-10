@@ -3,7 +3,7 @@
 #include "edam.h"
 
 static Discdesc desc[NBUFFILES];
-static char tempfname[30];
+
 static int inited=0;
 
 void Dremove(void);
@@ -26,7 +26,7 @@ Dremove(void)
    int i;
    Discdesc *dd;
    for(i=0, dd=desc; dd->fd; i++, dd++){
-      sprintf(tempfname, "/tmp/edam%d.%d", getpid(), i);
+      mktempfname(i);
       unlink(tempfname);
    }
 }
@@ -39,7 +39,7 @@ Dstart(void)
    for(i=0, dd=desc; dd->fd; i++, dd++)
       if(i==NBUFFILES-1)
          panic("too many buffer files");
-   sprintf(tempfname, "/tmp/edam%d.%d", getpid(), i);
+   mktempfname(i);
    fd=open(tempfname, O_CREAT | O_TRUNC | O_WRONLY, 0600);
    if(fd<0){
       unlink(tempfname);
