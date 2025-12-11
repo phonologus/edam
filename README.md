@@ -48,7 +48,11 @@ self-contained, and can be moved anywhere. The manpage is
 installed to `$(PREFIX)/share/man/man1`. The `sedam` script
 and its manpage are also installed. 
 
-To uninstall, `make uninstall`.
+To uninstall, `make uninstall`, being sure to set `PREFIX` if
+`make install` was invoked with `PREFIX` set. For example, to
+uninstall the custom installation above:
+
+	make uninstall PREFIX=/opt
 
 New Features
 ============
