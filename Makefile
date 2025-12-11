@@ -10,7 +10,8 @@ BUNDLE=bundle
 
 PROG=edam
 
-INSTALLD=/usr/local
+INSTALLD=$(PREFIX)
+INSTALLD$(PREFIX)=/usr/local
 BINDIR=$(INSTALLD)/bin
 MANDIR=$(INSTALLD)/share/man/man
 

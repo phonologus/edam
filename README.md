@@ -33,10 +33,20 @@ Building and installing _Edam_ should be as easy as:
 
     make clean && make && make install
 
-Installation is into `/usr/local/bin`. The `edam` binary is
+Installation is into `/usr/local/bin` by default. A custom
+install location can be given by setting the `PREFIX` environment
+variable. For example, to install `edam` into `/opt/bin` invoke:
+
+	make install PREFIX=/opt
+
+or:
+
+	PREFIX=/opt make install
+
+The `edam` binary is
 self-contained, and can be moved anywhere. The manpage is
-installed to `/usr/local/share/man/man1`. The `sedam` script
-and its manpage are also installed.
+installed to `$(PREFIX)/share/man/man1`. The `sedam` script
+and its manpage are also installed. 
 
 To uninstall, `make uninstall`.
 
