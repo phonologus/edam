@@ -10,9 +10,10 @@ typedef struct Patlist{
    String   **ptr;
 }Patlist;
 
+extern char *tmpdir;
+
 char genbuf[BLOCKSIZE];
 char *home;
-char *tmpdir;
 int io;
 int panicking;
 int rescuing;
