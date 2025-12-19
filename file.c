@@ -434,7 +434,7 @@ int
 Fbgetc(File *f)
 {
    if(f->getci<=0)
-      return Fgetcload(f, f->getcp);
+      return Fbgetcload(f, f->getcp);
    --f->getcp;
    return 0377&f->getcbuf[--f->getci];
 }
@@ -471,4 +471,3 @@ ftempstr(char *s, int n)
    p.size=n;
    return &p;
 }
-
